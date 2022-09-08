@@ -12,29 +12,14 @@ trainer = ListTrainer(portuguese_bot)
 trainer.train([
   "Oi",
   "Oi, estou bem e como vc está?"
-])
-
-trainer.train([
   "Eae",
   "Eaê, tudo tranquilo?"
-])
-
-trainer.train([
   "to bem",
   "Precisa de ajuda?"
-])
-
-trainer.train([
   "tranquilo",
   "Precisa de ajuda?"
-])
-
-trainer.train([
   "sim",
   "Como posso te ajudar?"
-])
-
-trainer.train([
   "duvida",
   "Qual a sua dúvida?"
 ])

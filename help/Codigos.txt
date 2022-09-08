@@ -53,8 +53,8 @@
 // SEMPRE Q MODIFICAR: CTRL+C NO TERMINAL P ENCERRAR E EXECUTA NOVAMENTO O hello.py
 
 
-// CRIAR PASTA tests
-// CRIAR OS ARQUIVOS __init__.py e test_hello.py
+// CRIAR TESTE
+// CRIA A PASTA tests E OS ARQUIVOS __init__.py e test_hello.py
 
 // __init__.py 
 	(vazio)
@@ -120,8 +120,10 @@ ModuleNotFoundError: No module named 'chatterbot'
 	rm -rf ChatterBot-spacy-fixed		// No bash
 
 
+// DEBUGAR C PYTHON
+// NO ARQUIVO DC TEST test_hello.py
+	import pdb; pdb.set_trace()	// Cria breakpoint e possibilita debugar
 
-
-
-
+// CRIAR requirements.txt
+	pip freeze > requirements.txt
 

@@ -1,0 +1,127 @@
+
+// INSTALAR AMBIENTE VIRTUAL NO WINDOWS
+	pip install virtualenv
+
+// CRIAR E ACESSAR Acesse A PASTA DO PROJETO chatterbot-sandbox
+	mkdir chatterbot-sandbox
+	cd chatterbot-sandbox
+
+// CRIAR O AMBIENTE VIRTUAL
+	virtualenv env
+
+// OU CRIA AMBIENTE VIRTUAL DO PYTHON
+	python3 -m venv env
+
+// ATIVAR VENV
+	env\Scripts\activate	// FUNCIONA no cmd  // https://docs.python.org/pt-br/dev/library/venv.html
+	source env/Scripts/activate  // FUNCIONA no bash do VScode
+	source env/bin/activate  // FUNCIONA no bash
+
+// DESATIVAR VENV
+	deactivate
+
+
+// DENTRO DO AMBIENTE VIRTUAL
+// INSTALAR BIBLIOTECAS
+	python3.exe -m pip install --upgrade pip
+	pip install Flask
+	pip install chatterbot
+	pip install sQLAlchemy	// ESSA BIBLIOTECA SALVARÁ AS CONVERSAS DENTRO DO BANCO DE DADOS
+	pip install pytz
+	pip install pytest
+
+// CRIAR hello.py NO VS 
+// Se der erro p importar o Flask alterar a versão do python do VS (ver Comandos.png)
+// CTRL + SHIFT + P
+// pyhon: Select Interpreter e ir selecionando/testando até dá certo
+
+// hello.py
+	from flask import Flask
+	app = Flask(__name__)
+	@app.route("/hello")
+	def hello():
+	  return "Hello World"
+	if __name__ == "__main__":
+	  app.run()
+  
+// DENTRO DA ENV
+	$ python3 hello.py
+// NO BROWSER
+	http://127.0.0.1:5000/hello_rota
+
+
+// SEMPRE Q MODIFICAR: CTRL+C NO TERMINAL P ENCERRAR E EXECUTA NOVAMENTO O hello.py
+
+
+// CRIAR PASTA tests
+// CRIAR OS ARQUIVOS __init__.py e test_hello.py
+
+// __init__.py 
+	(vazio)
+
+// test_hello.py
+	from urllib import response
+	from hello import app
+
+	def test_hello():
+	  response = app.test_client().get("/hello_rota")
+
+	  assert response.status_code == 200    # código 200 a página existe
+	  assert response.data == b"Testando hgnfghnfhngf"
+  
+
+// NO TERMINAL
+	pytest tests/
+
+// CRIAR PASTA templates E ARQUIVO index.html
+
+// CRIAR AS PASTAS static, css (style.css) e img (robot.png)
+
+// EM test_hello.py ADICIONA CÓDIGO DO chatbot E DO Flask
+# Linhas de 8 a 15 são do chatbot
+	portuguese_bot = ChatBot("Chatterbot", storage_adapter="chatterbot.storage.SQLStorageAdapter")
+	trainer = ListTrainer(portuguese_bot)
+	trainer.train([
+	  "Olá",
+	  "Olá, estou bem e como vc está?"
+	])
+
+# Linhas do Flask abaixo
+	@app.route("/")
+	def home():
+	  return render_template("index.html")
+
+	@app.route("/get")
+	def get_bot_response():
+	  userText = request.args.get("msg")
+	  return str(portuguese_bot.get_response(userText))
+
+// NO TERMINAL:
+(env) D:\Cursos\EBAC\chatbot-workshop>python3 hello.py
+Traceback (most recent call last):
+  File "D:\Cursos\EBAC\chatbot-workshop\hello.py", line 2, in <module>
+    from chatterbot import ChatBot
+ModuleNotFoundError: No module named 'chatterbot'
+
+// P CORRIGIR ESSE ERRO
+// CLONA REPOSITORIO GIT
+	git clone https://github.com/feignbird/ChatterBot-spacy_fixed.git
+	pip install ./ChatterBot-spacy_fixed
+	pip install chatterbot-corpus
+	pip uninstall pyYAML
+	pip install pyYAML==5.3.1
+	python3 -m spacy download en_core_web_sm
+
+// CHECA SE O APP VAI SUBIR C SUCESSO APÓS AS INSTALAÇÕES
+	python3 hello.py
+
+// DELETA PASTA CLONADA P INSTALAÇÃO
+	rmdir /s ChatterBot-spacy-fixed		// No cmd
+	rm -rf ChatterBot-spacy-fixed		// No bash
+
+
+
+
+
+
+
